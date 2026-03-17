@@ -1,10 +1,8 @@
 import streamlit as st
 
-
 # ----------------------------------------
 # CLASE (POO)
 # ----------------------------------------
-
 class Cliente:
     def __init__(self, nombre, edad, saldo):
         self.__nombre = nombre
@@ -29,7 +27,19 @@ class Cliente:
 # ----------------------------------------
 # STREAMLIT
 # ----------------------------------------
-
 st.title("Demo POO - Ciencia de Datos")
-
 st.write("Ingrese los datos del cliente:")
+
+nombre = st.text_input("Nombre")
+edad = st.number_input("Edad", min_value = 0)
+saldo = st.number_input("Saldo", min_value = 0.0)
+
+if st.button("Crear Cliente"):
+
+    #Secuencia
+    cliente = Cliente(nombre, edad, saldo)
+
+    st.success("Cliente creado correctamente")
+
+    st.write("### Información del cliente: ")
+    st.write(cliente.mostrar_info())
