@@ -1,32 +1,8 @@
 import streamlit as st
+from models.cliente import Cliente
+from services.cliente_service import crear_cliente
 
-# ----------------------------------------
-# CLASE (POO)
-# ----------------------------------------
-class Cliente:
-    def __init__(self, nombre, edad, saldo):
-        self.__nombre = nombre
-        self.__edad = edad
-        self.__saldo = saldo
 
-    #GETTERS (encapsulamiento)
-    def get_nombre(self):
-        return self.__nombre
-    
-    def get_edad(self):
-        return self.__edad
-
-    def get_saldo(self):
-        return self.__saldo
-  
-
-    # Método
-    def mostrar_info(self):
-        return f"Cliente: {self.__nombre}, Edad: {self.__edad}, Saldo: S/ {self.__saldo}"
-
-# ----------------------------------------
-# STREAMLIT
-# ----------------------------------------
 st.title("Demo POO - Ciencia de Datos")
 st.write("Ingrese los datos del cliente:")
 
@@ -36,10 +12,14 @@ saldo = st.number_input("Saldo", min_value = 0.0)
 
 if st.button("Crear Cliente"):
 
-    #Secuencia
-    cliente = Cliente(nombre, edad, saldo)
+    try:
+        #Secuencia
+        cliente = crear_cliente(nombre, edad, saldo)
 
-    st.success("Cliente creado correctamente")
+        st.success("Cliente creado correctamente")
 
-    st.write("### Información del cliente: ")
-    st.write(cliente.mostrar_info())
+        st.write("### Información del cliente: ")
+        st.write(cliente.mostrar_info())
+    
+    except Exception as e:
+        st.error(str(e))
