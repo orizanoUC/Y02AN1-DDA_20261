@@ -22,7 +22,7 @@ class Cliente:
 
     # Método
     def mostrar_info(self):
-        return f"Cliente: {self.__nombre}, Edad: {self.__edad}, Saldo: S/ {self-__saldo}"
+        return f"Cliente: {self.__nombre}, Edad: {self.__edad}, Saldo: S/ {self.__saldo}"
 
 # ----------------------------------------
 # STREAMLIT
