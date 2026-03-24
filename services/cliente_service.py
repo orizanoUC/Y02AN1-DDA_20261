@@ -6,6 +6,9 @@ def crear_cliente(nombre, edad, saldo):
     if nombre == "":
         raise ValueError("El nombre es obligatorio")
 
+    if not nombre.replace(" ", "").isalpha():
+        raise ValueError("El nombre solo debe de contener letras")
+
     #Validación 2:Edad
     if edad < 18:
         raise ValueError ("El cliente debe ser mayor de edad")
