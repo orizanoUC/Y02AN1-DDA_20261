@@ -29,7 +29,7 @@ if st.button("Crear Cliente"):
         data = {
             "Nombre": [cliente.get_nombre()],
             "Edad": [cliente.get_edad()],
-            "Saldo": [cliente.get_saldo]
+            "Saldo": [cliente.get_saldo()]
         }
 
         df = pd.DataFrame(data)
