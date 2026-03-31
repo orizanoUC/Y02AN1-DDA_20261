@@ -7,6 +7,11 @@ from services.cliente_service import crear_cliente
 st.title("Demo POO - Ciencia de Datos")
 st.write("Ingrese los datos del cliente:")
 
+
+# Inicializar lista en memoria
+if "clientes" not in st.session_state:
+    st.session_state.clientes = []
+
 # Inputs
 nombre = st.text_input("Nombre")
 edad = st.number_input("Edad", min_value = 0)
