@@ -47,7 +47,7 @@ if len(st.session_state.clientes) > 0:
     # FOR -> recorrer clientes
     st.write("### Lista de clientes (for)")
     for c in st.session_state.clientes:
-        st.write(f"{c['Nombre']} - S/ {c['Saldo']}")
+        st.write(f"{c['Nombre']} - Edad: {c['Edad']}")
 
 
     # WHILE -> recorrido alternativo
