@@ -55,7 +55,7 @@ if len(st.session_state.clientes) > 0:
     i = 0
     while i < len(st.session_state.clientes):
         c = st.session_state.clientes[i]
-        st.write(f"{c['Nombre'] - Edad: {c['Edad']}}")
+        st.write(f"{c['Nombre']} - Edad: {c['Edad']}")
         i += 1
     
     # Análisis: Total de clientes
