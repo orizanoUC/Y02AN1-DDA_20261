@@ -12,30 +12,48 @@ st.write("Ingrese los datos del cliente:")
 if "clientes" not in st.session_state:
     st.session_state.clientes = []
 
-# Inputs
-nombre = st.text_input("Nombre")
-edad = st.number_input("Edad", min_value = 0)
-saldo = st.number_input("Saldo", min_value = 0.0)
+def mostrar_tabla(clientes):
+    df = pd.DataFrame(clientes)
+    st.dataframe(df)
 
-# Botón
-if st.button("Crear Cliente"):
+def calcular_promedio(clientes):
+    suma = 0
+    for c in clientes:
+        suma += c["Saldo"]
+    return suma / len(clientes)
 
-    try:
-        # Crea Cliente + Mensaje
-        cliente, mensaje = crear_cliente(nombre, edad, saldo)
+with st.form("form_cliente"):
+    # Inputs
+    nombre = st.text_input("Nombre")
+    edad = st.number_input("Edad", min_value = 0)
+    saldo = st.number_input("Saldo", min_value = 0.0)
 
-        st.success("Cliente creado correctamente")
-        st.info(mensaje)
+    submitted = st.form_submit_button("Crear Cliente")
 
-        #Guardar en Memoria
-        st.session_state.clientes.append({
-            "Nombre": cliente.get_nombre(),
-            "Edad": cliente.get_edad(),
-            "Saldo": cliente.get_saldo()
-        })
-    
-    except Exception as e:
-        st.error(str(e))
+    if submitted:
+
+        try:
+            if nombre == "":
+                st.warning("Ingrese un nombre válido")
+            else:
+                # Crea Cliente + Mensaje
+                cliente, mensaje = crear_cliente(nombre, edad, saldo)
+
+                st.success("Cliente creado correctamente")
+                st.info(mensaje)
+
+                #Guardar en Memoria
+                st.session_state.clientes.append({
+                    "Nombre": cliente.get_nombre(),
+                    "Edad": cliente.get_edad(),
+                    "Saldo": cliente.get_saldo()
+                })
+        
+        except ValueError as e:
+            st.warning(str(e))
+
+        except Exception as e:
+            st.error(str(e))
 
 #Mostrar tabla acomulada
 if len(st.session_state.clientes) > 0:
@@ -59,18 +77,12 @@ if len(st.session_state.clientes) > 0:
         i += 1
     
     # Análisis: Total de clientes
-    contador = 0
-    for c in st.session_state.clientes:
-        contador += 1
+    contador = len (st.session_state.clientes)
+    st.write(f"Total de clientes: {contador}")
     
-    st.write(f"Total de Clientes: {contador}")
 
     # Promedio de saldo
-    suma = 0
-    for c in st.session_state.clientes:
-        suma += c["Saldo"]
-    
-    promedio = suma / contador
+    promedio = calcular_promedio(st.session_state.clientes)
     st.write(f"Promedio de saldo: S/ {round(promedio, 2)}")
 
 else:
