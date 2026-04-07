@@ -29,6 +29,8 @@ with st.form("form_cliente"):
         try:
             if nombre == "":
                 st.warning("Ingrese un nombre válido")
+            elif saldo < 0:
+                st.warning("El saldo no puede ser negativo")
             else:
                 # Crea Cliente + Mensaje
                 cliente, mensaje = crear_cliente(nombre, edad, saldo)
